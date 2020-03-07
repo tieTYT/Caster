@@ -80,36 +80,36 @@ class Navigation(MergeRule):
                                repetitions=50),
 
         # keyboard shortcuts
-        'save':
-            R(Key("c-s"), rspec="save"),
-        '(shock | new line) [<nnavi50>]':
+#        'save':
+#            R(Key("c-s"), rspec="save"),
+        'new line [<nnavi50>]':
             R(Key("enter"), rspec="shock")*Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
-        "(stoosh | copy) [<nnavi500>]":
+        "copy [<nnavi500>]":
             R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard), rspec="cut"),
-        "(spark|paste) [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
+        "paste [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
             R(Function(navigation.drop_keep_clipboard), rspec="spark"),
-        "splat [<splatdir>] [<nnavi10>]":
-            R(Key("c-%(splatdir)s"), rspec="splat")*Repeat(extra="nnavi10"),
-        "deli [<nnavi50>]":
+#        "splat [<splatdir>] [<nnavi10>]":
+#            R(Key("c-%(splatdir)s"), rspec="splat")*Repeat(extra="nnavi10"),
+        "delete [<nnavi50>]":
             R(Key("del/5"), rspec="deli")*Repeat(extra="nnavi50"),
-        "clear [<nnavi50>]":
-            R(Key("backspace/5:%(nnavi50)d"), rspec="clear"),
+#        "clear [<nnavi50>]":
+#            R(Key("backspace/5:%(nnavi50)d"), rspec="clear"),
         SymbolSpecs.CANCEL:
             R(Key("escape"), rspec="cancel"),
-        "(shackle | select line)":
+        "select line":
             R(Key("home/5, s-end"), rspec="shackle"),
-        "(tell | tau) <semi>":
-            R(Function(navigation.next_line), rspec="tell dock"),
-        "duple [<nnavi50>]":
-            R(Function(navigation.duple_keep_clipboard), rspec="duple"),
-        "Kraken":
-            R(Key("c-space"), rspec="Kraken"),
+#        "(tell | tau) <semi>":
+#            R(Function(navigation.next_line), rspec="tell dock"),
+#        "duple [<nnavi50>]":
+#            R(Function(navigation.duple_keep_clipboard), rspec="duple"),
+#        "Kraken":
+#            R(Key("c-space"), rspec="Kraken"),
         "undo [<nnavi10>]":
             R(Key("c-z"))*Repeat(extra="nnavi10"),
         "redo [<nnavi10>]":
@@ -148,25 +148,25 @@ class Navigation(MergeRule):
             R(Function(navigation.middle_click)),
         "double click":
             R(Function(navigation.left_click)*Repeat(2)),
-        "squat":
+        "hold left down":
             R(Function(navigation.left_down)),
-        "bench":
+        "lift left up":
             R(Function(navigation.left_up)),
 
         # keystroke commands
         "<direction> [<nnavi500>]":
             R(Key("%(direction)s")*Repeat(extra='nnavi500'), rdescript="arrow keys"),
-        "(lease wally | latch | go to beginning of line) [<nnavi10>]":
+        "go to beginning of line [<nnavi10>]":
             R(Key("home:%(nnavi10)s")),
-        "(ross wally | ratch | go to end of line) [<nnavi10>]":
+        "go to end of line [<nnavi10>]":
             R(Key("end:%(nnavi10)s")),
-        "(sauce wally | go to beginning) [<nnavi10>]":
+        "go to beginning [<nnavi10>]":
             R(Key("c-home:%(nnavi10)s")),
-        "(dunce wally | go to end)[<nnavi10>]":
+        "go to end[<nnavi10>]":
             R(Key("c-end:%(nnavi10)s")),
-        "(bird | left word) [<nnavi500>]":
+        "left word [<nnavi500>]":
             R(Key("c-left:%(nnavi500)s")),
-        "(firch | right word) [<nnavi500>]":
+        "right word [<nnavi500>]":
             R(Key("c-right:%(nnavi500)s")),
         "brick [<nnavi500>]":
             R(Key("s-left:%(nnavi500)s")),
@@ -202,15 +202,15 @@ class Navigation(MergeRule):
     button_dictionary_500 = {
         "(tab | tabby)": "tab",
         "(backspace | clear)": "backspace",
-        "(delete|deli)": "del",
+        "delete": "del",
         "(escape | cancel)": "escape",
-        "(enter | shock)": "enter",
-        "(left | lease)": "left",
-        "(right | ross)": "right",
-        "(up | sauce)": "up",
-        "(down | dunce)": "down",
-        "page (down | dunce)": "pgdown",
-        "page (up | sauce)": "pgup",
+        "enter": "enter",
+        "left": "left",
+        "right": "right",
+        "up": "up",
+        "down": "down",
+        "page down": "pgdown",
+        "page up": "pgup",
         "space": "space"
     }
     button_dictionary_10 = {
@@ -230,8 +230,8 @@ class Navigation(MergeRule):
     }
     button_dictionary_10.update(longhand_punctuation_names)
     button_dictionary_1 = {
-        "(home | lease wally | latch)": "home",
-        "(end | ross wally | ratch)": "end",
+        "home": "home",
+        "end": "end",
         "insert": "insert",
         "zero": "0",
         "one": "1",
@@ -249,10 +249,10 @@ class Navigation(MergeRule):
         combined_button_dictionary.update(dictionary)
 
     modifier_choice_object = Choice("modifier", {
-            "(control | fly)": "c-", #TODO: make DRY
-            "(shift | shin)": "s-",
+            "control": "c-", #TODO: make DRY
+            "shift": "s-",
             "alt": "a-",
-            "(control shift | que)": "cs-",
+            "control shift": "cs-",
             "control alt": "ca-",
             "(shift alt | alt shift)": "sa-",
             "(control alt shift | control shift alt)": "csa-",  # control must go first
