@@ -63,7 +63,7 @@ class TextFormat():
 
     @classmethod
     def get_text_format_description(cls, capitalization, spacing):
-        caps = {0: "<none>", 1: "yell", 2: "tie", 3: "gerrish", 4: "sing", 5: "laws", 6: "say", 7: "cop", 8: "slip"}
+        caps = {0: "<none>", 1: "yell", 2: "title case", 3: "camel case", 4: "sing", 5: "(lower|lowercase)", 6: "say", 7: "cop"}
         spaces = {
             0: "<none>",
             1: "gum",

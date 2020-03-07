@@ -82,17 +82,17 @@ class Navigation(MergeRule):
         # keyboard shortcuts
         'save':
             R(Key("c-s"), rspec="save"),
-        'shock [<nnavi50>]':
+        '(shock | new line) [<nnavi50>]':
             R(Key("enter"), rspec="shock")*Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
-        "stoosh [<nnavi500>]":
+        "(stoosh | copy) [<nnavi500>]":
             R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard), rspec="cut"),
-        "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
+        "(spark|paste) [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
             R(Function(navigation.drop_keep_clipboard), rspec="spark"),
         "splat [<splatdir>] [<nnavi10>]":
             R(Key("c-%(splatdir)s"), rspec="splat")*Repeat(extra="nnavi10"),
@@ -102,7 +102,7 @@ class Navigation(MergeRule):
             R(Key("backspace/5:%(nnavi50)d"), rspec="clear"),
         SymbolSpecs.CANCEL:
             R(Key("escape"), rspec="cancel"),
-        "shackle":
+        "(shackle | select line)":
             R(Key("home/5, s-end"), rspec="shackle"),
         "(tell | tau) <semi>":
             R(Function(navigation.next_line), rspec="tell dock"),
@@ -140,11 +140,13 @@ class Navigation(MergeRule):
               rdescript="Core: switch to most recent Windows"),
 
         # Ccr Mouse Commands
-        "kick [<nnavi3>]":
+        "click [<nnavi3>]":
             R(Function(navigation.left_click))*Repeat(extra="nnavi3"),
-        "psychic":
+        "right click":
             R(Function(navigation.right_click)),
-        "(kick double|double kick)":
+        "middle click":
+            R(Function(navigation.middle_click)),
+        "double click":
             R(Function(navigation.left_click)*Repeat(2)),
         "squat":
             R(Function(navigation.left_down)),
@@ -154,17 +156,17 @@ class Navigation(MergeRule):
         # keystroke commands
         "<direction> [<nnavi500>]":
             R(Key("%(direction)s")*Repeat(extra='nnavi500'), rdescript="arrow keys"),
-        "(lease wally | latch) [<nnavi10>]":
+        "(lease wally | latch | go to beginning of line) [<nnavi10>]":
             R(Key("home:%(nnavi10)s")),
-        "(ross wally | ratch) [<nnavi10>]":
+        "(ross wally | ratch | go to end of line) [<nnavi10>]":
             R(Key("end:%(nnavi10)s")),
-        "sauce wally [<nnavi10>]":
+        "(sauce wally | go to beginning) [<nnavi10>]":
             R(Key("c-home:%(nnavi10)s")),
-        "dunce wally [<nnavi10>]":
+        "(dunce wally | go to end)[<nnavi10>]":
             R(Key("c-end:%(nnavi10)s")),
-        "bird [<nnavi500>]":
+        "(bird | left word) [<nnavi500>]":
             R(Key("c-left:%(nnavi500)s")),
-        "firch [<nnavi500>]":
+        "(firch | right word) [<nnavi500>]":
             R(Key("c-right:%(nnavi500)s")),
         "brick [<nnavi500>]":
             R(Key("s-left:%(nnavi500)s")),
@@ -172,6 +174,8 @@ class Navigation(MergeRule):
             R(Key("s-right:%(nnavi500)s")),
         "blitch [<nnavi500>]":
             R(Key("cs-left:%(nnavi500)s")),
+        "delete [<nnavi500>] (word|words)":
+            R(Key("c-backspace:%(nnavi500)s")),
         "flitch [<nnavi500>]":
             R(Key("cs-right:%(nnavi500)s")),
         "<modifier> <button_dictionary_500> [<nnavi500>]":
@@ -271,10 +275,10 @@ class Navigation(MergeRule):
         Dictation("textnv"),
         Choice("enclosure", _dtpd),
         Choice("direction", {
-            "dunce": "down",
-            "sauce": "up",
-            "lease": "left",
-            "ross": "right",
+            "down": "down",
+            "up": "up",
+            "left": "left",
+            "right": "right",
         }),
         modifier_choice_object,
         Choice("button_dictionary_1", button_dictionary_1),

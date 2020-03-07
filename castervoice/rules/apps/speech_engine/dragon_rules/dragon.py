@@ -51,18 +51,18 @@ class DragonRule(MappingRule):
             rdescript="Dragon: delete dictation from previous n utterances") * Repeat(extra="n10"),
 
             # Users may want to adjust the wait time on the next few commands     
-        "train word": R(Mimic("train", "that") + Pause("75") + Key("a-r/250, s"),
-             rdescript="Dragon: quickly train word when you have it selected in a Dragon friendly text field"),
-        "word train": R(Key("c-c/20") + Mimic("edit", "vocabulary") + 
-            Key("c-v/5, tab, down, up, a-t/50, enter/50, a-r/250, s/50, escape"),
-             rdescript="train word quickly once you have it selected in non-full text control application"),
-        "(add train | train from add word)": R(Key("a-a/2, enter/300, a-s"),
-            rdescript="Dragon: quickly train word from the add word dialogbox"),
+#        "train word": R(Mimic("train", "that") + Pause("75") + Key("a-r/250, s"),
+#             rdescript="Dragon: quickly train word when you have it selected in a Dragon friendly text field"),
+#        "word train": R(Key("c-c/20") + Mimic("edit", "vocabulary") + 
+#            Key("c-v/5, tab, down, up, a-t/50, enter/50, a-r/250, s/50, escape"),
+#             rdescript="train word quickly once you have it selected in non-full text control application"),
+#        "(add train | train from add word)": R(Key("a-a/2, enter/300, a-s"),
+#            rdescript="Dragon: quickly train word from the add word dialogbox"),
     
-        "(train from vocab | cab train)": R(Key("a-t/50, enter/50, a-r/250, s"), 
-            rdescript="Dragon: quickly train word from Vocabulary Editor"),
-        "(train from vocab | cab train)": R(Key("a-t/50, enter/50, a-r/250, s"), 
-            rdescript="Dragon: quickly train word from Vocabulary Editor"),
+#        "(train from vocab | cab train)": R(Key("a-t/50, enter/50, a-r/250, s"), 
+#            rdescript="Dragon: quickly train word from Vocabulary Editor"),
+#        "(train from vocab | cab train)": R(Key("a-t/50, enter/50, a-r/250, s"), 
+#            rdescript="Dragon: quickly train word from Vocabulary Editor"),
         "remove from vocab":
             R(Key("c-c/5") + Mimic("edit", "vocabulary") + Pause("20") + 
             Key("c-v/10, tab, down, up/5, a-d, y, escape/30, right"), 
