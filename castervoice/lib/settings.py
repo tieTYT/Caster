@@ -419,6 +419,10 @@ def _get_defaults():
                 "text_format": [3, 1],
                 "secondary_format": [2, 1],
             },
+            "Typescript": {
+                "text_format": [3, 1],
+                "secondary_format": [2, 1],
+            },
             "matlab": {
                 "text_format": [3, 1],
                 "secondary_format": [1, 3],

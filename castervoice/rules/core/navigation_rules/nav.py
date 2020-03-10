@@ -287,7 +287,7 @@ class Navigation(MergeRule):
         Choice("combined_button_dictionary", combined_button_dictionary),
 
         Choice("capitalization", {
-            "yell": 1,
+            "upper case": 1,
             "tie": 2,
             "gerrish": 3,
             "sing": 4,

@@ -85,8 +85,8 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-o"), rdescript="VS Code: open file dialogbox"),
         "open folder":
             R(Key("c-k, c-o"), rdescript="VS Code: Open folder"),
-        "Save and close":
-            R(Key("c-s/10, c-w")),
+#        "Save and close":
+#            R(Key("c-s/10, c-w")),
         "new file":
             R(Key("c-n")),
         "new window":
@@ -97,10 +97,10 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-k, f")),
         "close editor":
             R(Key("c-f4")),
-        "save as":
-            R(Key("cs-s")),
-        "save all":
-            R(Key("c-k, s")),
+#        "save as":
+#            R(Key("cs-s")),
+#        "save all":
+#            R(Key("c-k, s")),
         "next tab [<n>]":
             R(Key("c-pgdown") * Repeat(extra='n')),
         "previous tab [<n>]":
@@ -157,11 +157,11 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-w")),
         "close folder":
             R(Key("c-k, f")),
-        "split editor":
+        "split (editor|pane)":
             R(Key("c-backslash")),
         "next pane":
             R(Key("c-k, c-right")),
-        "(prior | previous | un) pane":
+        "(prior | previous) pane":
             R(Key("c-k, c-right")),
         "shift group left":
             R(Key("c-k, left"),
