@@ -63,21 +63,22 @@ class TextFormat():
 
     @classmethod
     def get_text_format_description(cls, capitalization, spacing):
-        caps = {0: "<none>", 1: "yell", 2: "title case", 3: "camel case", 4: "sing", 5: "(lower|lowercase)", 6: "say", 7: "cop"}
-        spaces = {
-            0: "<none>",
-            1: "gum",
-            2: "spine",
-            3: "snake",
-            4: "pebble",
-            5: "incline",
-            6: "descent"
-        }
-        if capitalization == 0 and spacing == 0:
-            return "<none>"
-        else:
-            text = cls.formatted_text(capitalization, spacing, str("this is a test"))
-            return "%s %s (%s)" % (caps[capitalization], spaces[spacing], text)
+#        caps = {0: "<none>", 1: "yell", 2: "title case", 3: "camel case", 4: "sing", 5: "(lower|lowercase)", 6: "say", 7: "cop"}
+#        spaces = {
+#            0: "<none>",
+#            1: "gum",
+#            2: "spine",
+#            3: "snake",
+#            4: "pebble",
+#            5: "incline",
+#            6: "descent"
+#        }
+#        if capitalization == 0 and spacing == 0:
+#            return "<none>"
+#        else:
+#            text = cls.formatted_text(capitalization, spacing, str("this is a test"))
+#            return "%s %s (%s)" % (caps[capitalization], spaces[spacing], text)
+        return "<none>"
 
     @classmethod
     def normalize_text_format(cls, capitalization, spacing):

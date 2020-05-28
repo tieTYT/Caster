@@ -17,8 +17,8 @@ class Typescript(MergeRule):
 #            R(Text("else {}") + Key("left, enter:2, up")),
         #
         SymbolSpecs.SWITCH:
-            R(Text("switch () {}") + Key("left, enter:2, up")),
-        SymbolSpecs.CASE:
+            R(Text("switch () {}") + Key("left:4")),
+        "case statement":
             R(Text("case :") + Key("left")),
         SymbolSpecs.BREAK:
             R(Text("break;")),
@@ -38,8 +38,8 @@ class Typescript(MergeRule):
             R(Text("parseInt()") + Key("left")),
         SymbolSpecs.TO_FLOAT:
             R(Text("parseFloat()") + Key("left")),
-        SymbolSpecs.TO_STRING:
-            R(Key("dquote, dquote, plus")),
+#        SymbolSpecs.TO_STRING:
+#            R(Key("dquote, dquote, plus")),
         #
         SymbolSpecs.AND:
             R(Text(" && ")),
@@ -48,20 +48,28 @@ class Typescript(MergeRule):
         SymbolSpecs.NOT:
             R(Text("!")),
         #
-        SymbolSpecs.SYSOUT:
+        "log":
             R(Text("console.log()") + Key("left")),
         #
         # (no imports in javascript)
         #
-        SymbolSpecs.FUNCTION:
-            R(Text("function TOKEN() {};") + Key("left:2, enter")),
-	    SymbolSpecs.CLASS:
-            R(Text("class  {}") + Key("left/5:3")),
+#        SymbolSpecs.FUNCTION:
+#            R(Text("function TOKEN() {};") + Key("left:2, enter")),
+	    "class":
+            R(Text("class ")),
+	    "extends":
+            R(Text("extends ")),
+	    "public":
+            R(Text("public ")),
+	    "new":
+            R(Text("new ")),
+	    "type of":
+            R(Text("typeof ")),
         #
-        SymbolSpecs.COMMENT:
-            R(Text("//")),
-        SymbolSpecs.LONG_COMMENT:
-            R(Text("/**/") + Key("left,left")),
+#        SymbolSpecs.COMMENT:
+#            R(Text("//")),
+#        SymbolSpecs.LONG_COMMENT:
+#            R(Text("/**/") + Key("left,left")),
         #
         SymbolSpecs.NULL:
             R(Text("null")),
@@ -97,27 +105,35 @@ class Typescript(MergeRule):
             R(Text("push")),
         "inner HTML":
             R(Text("innerHTML")),
-        "new new":
-            R(Text("new ")),
+#        "new new":
+#            R(Text("new ")),
         "continue":
             R(Text("continue")),
         "this":
             R(Text("this")),
         "try":
-            R(Text("try {}") + Key("left, enter:2, up")),
-        "catch":
-            R(Text("catch(e) {}") + Key("left, enter:2, up")),
+            R(Text("try {}") + Key("left")),
+        #"catch":
+         #   R(Text("catch(e) {}") + Key("left")),
         "throw":
             R(Text("throw ")),
         "instance of":
             R(Text("instanceof ")),
         "var":
             R(Text("var ")),
+        "export":
+            R(Text("export ")),
+        "export":
+            R(Text("export ")),
+        "interface":
+            R(Text("interface ")),
+        "type":
+            R(Text("type ")),
         "const":
             R(Text("const ")),
         "Let":
             R(Text("let ")),
-        "shell iffae":
+        "else if":
             R(Text("else if ()") + Key("left")),
         "a sink":
             R(Text("async ")),

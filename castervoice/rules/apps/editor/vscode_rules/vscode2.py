@@ -24,10 +24,12 @@ def _find_nth_token(text, n, direction):
 class VSCodeNonCcrRule(MappingRule):
     mapping = {
         # Moving around a file
-        "[(go to | jump | jump to)] line <n>":
+        "line <n>":
             R(Key("c-g") + Text("%(n)d") + Key("enter")),
-        "<action> [line] <ln1> [by <ln2>]":
-            R(Function(navigation.action_lines)),
+        "end of line <n>":
+            R(Key("c-g") + Text("%(n)d") + Key("enter")+ Pause("15")+ Key("end")),
+        # "<action> [line] <ln1> [by <ln2>]":
+            # R(Function(navigation.action_lines)),
 
         "go back <n>":
             R(Key("a-left") * Repeat(extra='n')),
@@ -44,6 +46,10 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-equal") * Repeat(extra='n')),
         "zoom out [<n>]":
             R(Key("c-minus") * Repeat(extra='n')),
+        "swap down [<n>]":
+            R(Key("a-down") * Repeat(extra='n')),
+        "swap up [<n>]":
+            R(Key("a-up") * Repeat(extra='n')),
         "sidebar":
             R(Key("c-b")),
         "explorer":
@@ -77,7 +83,7 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-k, p")),
         "[open] command palette [<text>]":
             R(Key("cs-p") + Text("%(text)s"), rdescript="VS Code: Command Palette"),
-        "(open file | go to [tab]) [<text>]":
+        "open file [<text>]":
             R(Key("c-p") + Text("%(text)s"), rdescript="VS Code: Go to File without using dialogbox"),
         "open project [<text>]":
             R(Key("c-r") + Pause("30") + Text("%(text)s")),
@@ -149,8 +155,8 @@ class VSCodeNonCcrRule(MappingRule):
             R(Function(_find_nth_token, n=1, direction="reverse")),
         "show all symbols":
             R(Key("c-t")),
-        "go to symbol":
-            R(Key("cs-o")),
+        # "go to symbol":
+            # R(Key("cs-o")),
 
         # Editor Management
         "close editor":
@@ -159,10 +165,16 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-k, f")),
         "split (editor|pane)":
             R(Key("c-backslash")),
-        "next pane":
+        "next (editor|pane)":
             R(Key("c-k, c-right")),
-        "(prior | previous) pane":
+        "(prior | previous) (editor|pane)":
             R(Key("c-k, c-right")),
+        "move tab to previous (editor|pane)":
+            R(Key("ca-left"),
+            rdescript="VS Code: Move the current tab to the editor pane on the left."),
+        "move tab to next (editor|pane)":
+            R(Key("ca-right"),
+            rdescript="VS Code: Move the current tab to the editor pane on the right."),
         "shift group left":
             R(Key("c-k, left"),
               rdescript="VS Code: Shift Current Group of Tabs to the Left E.g. Swap with Pane to the Left"),
@@ -174,14 +186,16 @@ class VSCodeNonCcrRule(MappingRule):
             R(Key("c-%(nth)s")),
 
         # Languages Editing
-        "go to definition":
-            R(Key("f12")),
-        "go to required definition":
-            R(Key("c-f12:2, c-right:5, left/50, f12")),
+        # "go to definition":
+            # R(Key("f12")),
+        # "go to required definition":
+            # R(Key("c-f12:2, c-right:5, left/50, f12")),
         "peak definition":
             R(Key("a-f12")),
         "trigger parameter hints":
             R(Key("cs-space")),
+        "format document":
+            R(Key("sa-f")),
         "format that":
             R(Key("c-k, c-f")),
         "(definition to side | side def)":

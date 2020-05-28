@@ -6,6 +6,7 @@ from castervoice.rules.core.navigation_rules import navigation_support
 from dragonfly.actions.action_mimic import Mimic
 
 from castervoice.lib.actions import Key, Mouse
+from dragonfly.actions.action_focuswindow import FocusWindow
 from castervoice.rules.ccr.standard import SymbolSpecs
 
 try:  # Try first loading from caster user directory
@@ -78,16 +79,31 @@ class Navigation(MergeRule):
                                finisher=Key("right"),
                                time_in_seconds=0.1,
                                repetitions=50),
-
+    # switch to applications
+        'switch to (vs|code)':
+            R(FocusWindow(executable="Code.exe"), rspec="switch to vs"),
+        'switch to discord':
+            R(FocusWindow(title="discord"), rspec="switch to vs"),
+        'switch to paint.net':
+            R(FocusWindow(title="paint.net"), rspec="switch to vs"),
+        'switch to J downloader':
+            R(FocusWindow(title="JDownloader"), rspec="switch to vs"),
+        'switch to cygwin':
+            R(FocusWindow(executable="mintty.exe"), rspec="switch to cygwin"),
+        'switch to Kindle':
+            R(FocusWindow(executable="Kindle.exe"), rspec="switch to cygwin"),
         # keyboard shortcuts
 #        'save':
 #            R(Key("c-s"), rspec="save"),
         'new line [<nnavi50>]':
             R(Key("enter"), rspec="shock")*Repeat(extra="nnavi50"),
-        # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
-        #     R(Function(text_utils.master_text_nav)), # this is now implemented below
+
+        "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
+            R(Function(text_utils.master_text_nav)), # this is now implemented below
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
+        "control C":
+            R(Key("c-c")),        
         "copy [<nnavi500>]":
             R(Function(navigation.stoosh_keep_clipboard), rspec="stoosh"),
         "cut [<nnavi500>]":
@@ -127,8 +143,8 @@ class Navigation(MergeRule):
             R(Function(textformat.clear_text_format)),
         "peek [<big>] format":
             R(Function(textformat.peek_text_format)),
-        "(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)] <textnv> [brunt]":
-            R(Function(textformat.master_format_text)),
+#        "(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)] <textnv> [brunt]":
+#            R(Function(textformat.master_format_text)),
         "[<big>] format <textnv>":
             R(Function(textformat.prior_text_format)),
         "<word_limit> [<big>] format <textnv>":
@@ -152,6 +168,10 @@ class Navigation(MergeRule):
             R(Function(navigation.left_down)),
         "lift left up":
             R(Function(navigation.left_up)),
+        "wheel up [<nnavi500>]":
+            R(Mouse("wheelup")*Repeat (extra= 'nnavi500')),
+        "wheel down [<nnavi500>]":
+            R(Mouse("wheeldown")*Repeat (extra= 'nnavi500')),
 
         # keystroke commands
         "<direction> [<nnavi500>]":
@@ -168,16 +188,16 @@ class Navigation(MergeRule):
             R(Key("c-left:%(nnavi500)s")),
         "right word [<nnavi500>]":
             R(Key("c-right:%(nnavi500)s")),
-        "brick [<nnavi500>]":
-            R(Key("s-left:%(nnavi500)s")),
-        "frick [<nnavi500>]":
-            R(Key("s-right:%(nnavi500)s")),
-        "blitch [<nnavi500>]":
-            R(Key("cs-left:%(nnavi500)s")),
+#        "brick [<nnavi500>]":
+#            R(Key("s-left:%(nnavi500)s")),
+#        "frick [<nnavi500>]":
+#            R(Key("s-right:%(nnavi500)s")),
+#        "blitch [<nnavi500>]":
+#            R(Key("cs-left:%(nnavi500)s")),
         "delete [<nnavi500>] (word|words)":
             R(Key("c-backspace:%(nnavi500)s")),
-        "flitch [<nnavi500>]":
-            R(Key("cs-right:%(nnavi500)s")),
+#        "flitch [<nnavi500>]":
+#            R(Key("cs-right:%(nnavi500)s")),
         "<modifier> <button_dictionary_500> [<nnavi500>]":
             R(Key("%(modifier)s%(button_dictionary_500)s")*Repeat(extra='nnavi500'),
               rdescript="press modifier keys plus buttons from button_dictionary_500"),
@@ -319,7 +339,6 @@ class Navigation(MergeRule):
         Choice("mtn_mode", {
             "shin": "s",
             "queue": "cs",
-            "fly": "c",
         }),
         Choice("extreme", {
             "Wally": "way",

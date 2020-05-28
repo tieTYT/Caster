@@ -122,7 +122,6 @@ class NavigationNon(MappingRule):
         }),
         Choice("wm", {
             "ex": 1,
-            "tie": 2
         }),
     ]
     defaults = {

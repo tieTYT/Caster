@@ -30,6 +30,11 @@ class VSCodeCcrRule(MergeRule):
         "scroll page down [<n>]":
             R(Key("a-pgdown")*Repeat(extra='n'),
               rdescript="VS Code: Scroll Down One Page Down At a Time"),
+        "word wrap":
+            R(Key("a-z"),
+              rdescript="VS Code: Toggle Word Wrap"),
+        "H next [<n>]":
+            R(Key("c-d")*Repeat (extra= "n")),
         "(unindent|out dent) [<n>]":
             R(Key("home, s-tab:%(n)s"), rdescript="VS Code: Unindent"),
         "comment [line]":
@@ -91,11 +96,11 @@ class VSCodeCcrRule(MergeRule):
               rdescript="VS Code: Add Cursor to Next Occurrence of Current Selection"),
         "indent [<n>]":
             R(Key("home, tab:%(n)s"), rdescript="VS Code: Indent"),
-        "hard delete [<n>]":
+        "delete line [<n>]":
             R(Key("s-del"), rdescript="VS Code: Eliminates Line not Just the Text on it"),
         "copy line up [<n>]":
             R(Key("sa-up")*Repeat(extra='n'), rdescript="VS Code: Duplicate Line Above"),
-        "copy line down [<n>]":
+        "duple [<n>]":
             R(Key("sa-down")*Repeat(extra='n'),
               rdescript="VS Code: Duplicate Line Below"),
         "switch line down [<n>]":
@@ -109,7 +114,7 @@ class VSCodeCcrRule(MergeRule):
 
         # commands for selecting between parable characters using "quick and simple text selection" VScode extension (required)
         # repetition of these commands by saying the number expands the selection to include the text between the next (i.e. outer) set of parable characters of the given type
-        "select between <between_parables> [<n>]":
+        "select (between|in) <between_parables> [<n>]":
             R(Key("c-k, %(between_parables)s")*Repeat(extra='n'),
               rdescript=
               "VS Code: Select between parentheses noninclusive using 'quick and simple text selection' VScode extension"
@@ -127,16 +132,16 @@ class VSCodeCcrRule(MergeRule):
         IntegerRefST("m", 1, 10),
         Choice(
             "between_parables", {
-                "prekris": "lparen",
-                "brax": "lbracket",
+                "paren": "lparen",
+                "bracket": "lbracket",
                 "curly": "lbrace",
                 "angle": "langle",
                 "single": "squote",
                 "quote": "dquote",
             }),
         Choice("around_parables", {
-            "prekris": "rparen",
-            "brax": "rbracket",
+            "paren": "rparen",
+            "bracket": "rbracket",
             "curly": "rbrace",
             "angle": "rangle",
         }),
