@@ -1,4 +1,4 @@
-from dragonfly import Function, Repeat, Choice, Dictation, MappingRule, Pause
+from dragonfly import Mimic, Function, Repeat, Choice, Dictation, MappingRule, Pause
 
 from castervoice.lib.actions import Key, Mouse
 
@@ -184,6 +184,20 @@ class VSCodeNonCcrRule(MappingRule):
               ),
         "<nth> tab":
             R(Key("c-%(nth)s")),
+        "T verb":
+            R(Key("cas-v")),
+        "T continue":
+            R(Key("cas-c")),
+        "T wrap":
+            R(Key("cas-i")),
+        "T description":
+            R(Key("cas-d")),
+        "T follower":
+            R(Key("cas-f")),
+        "T link":
+            R(Key("cas-l")),
+        "T say":
+            R(Key("c-k, dquote, c-k, dquote/10, cas-s")),
 
         # Languages Editing
         # "go to definition":
@@ -298,7 +312,7 @@ class VSCodeNonCcrRule(MappingRule):
         Dictation("mim"),
         IntegerRefST("ln1", 1, 1000),
         IntegerRefST("ln2", 1, 1000),
-        IntegerRefST("n", 1, 1000),
+        IntegerRefST("n", 1, 2000),
         Choice("action", navigation.actions),
         Choice(
             "nth", {

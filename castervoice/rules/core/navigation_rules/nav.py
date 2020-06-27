@@ -4,6 +4,7 @@ from castervoice.lib.context import AppContext
 from castervoice.lib import navigation, context, textformat, text_utils
 from castervoice.rules.core.navigation_rules import navigation_support
 from dragonfly.actions.action_mimic import Mimic
+from dragonfly.actions.action_text import Text
 
 from castervoice.lib.actions import Key, Mouse
 from dragonfly.actions.action_focuswindow import FocusWindow
@@ -90,6 +91,10 @@ class Navigation(MergeRule):
             R(FocusWindow(title="JDownloader"), rspec="switch to vs"),
         'switch to cygwin':
             R(FocusWindow(executable="mintty.exe"), rspec="switch to cygwin"),
+        "compile twine":
+            R(Mimic("switch", "to", "cygwin") + Text("npm run compile-twine") + Key("enter/40") + Mimic("switch", "to", "firefox") + Mimic("reload", "it")),
+        "run test[s]":
+            R(Mimic("switch", "to", "cygwin") + Text("npm run test") + Key("enter/40")),
         'switch to Kindle':
             R(FocusWindow(executable="Kindle.exe"), rspec="switch to cygwin"),
         # keyboard shortcuts

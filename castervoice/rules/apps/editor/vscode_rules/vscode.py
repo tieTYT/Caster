@@ -119,8 +119,8 @@ class VSCodeCcrRule(MergeRule):
               rdescript=
               "VS Code: Select between parentheses noninclusive using 'quick and simple text selection' VScode extension"
               ),
-        "select around <around_parables> [<n>]":
-            R(Key("c-k, %(around_parables)s")*Repeat(extra='n'),
+        "select around <between_parables> [<n>]":
+            R(Key("c-k, %(between_parables)s, c-k, %(between_parables)s")*Repeat(extra='n'),
               rdescript=
               "VS Code: Select between parentheses inclusive using 'quick and simple text selection' VScode extension"
               ),

@@ -6,7 +6,6 @@ DIRECTION_STANDARD = {
     "down [E]": "down",
     "left [E]": "left",
     "right [E]": "right",
-    "back": "left"
 }
 
 def get_direction_choice(name):
