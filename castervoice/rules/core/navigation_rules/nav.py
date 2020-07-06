@@ -94,7 +94,7 @@ class Navigation(MergeRule):
         "compile twine":
             R(Mimic("switch", "to", "cygwin") + Text("npm run compile-twine") + Key("enter/40") + Mimic("switch", "to", "firefox") + Mimic("reload", "it")),
         "run test[s]":
-            R(Mimic("switch", "to", "cygwin") + Text("npm run test") + Key("enter/40")),
+            R(Mimic("switch", "to", "cygwin") + Key("c-c") + Text("npm run test") + Key("enter/40")),
         'switch to Kindle':
             R(FocusWindow(executable="Kindle.exe"), rspec="switch to cygwin"),
         # keyboard shortcuts
@@ -152,6 +152,30 @@ class Navigation(MergeRule):
 #            R(Function(textformat.master_format_text)),
         "[<big>] format <textnv>":
             R(Function(textformat.prior_text_format)),
+        "contraction <text> will":
+            R(Text("%(text)s'll ")),
+        "cap contraction <text> will":
+            R(Function(lambda text:Text(text.capitalize() + "'ll ").execute())),
+        "contraction <text> have":
+            R(Text("%(text)s've ")),
+        "cap contraction <text> have":
+            R(Function(lambda text:Text(text.capitalize() + "'ve ").execute())),
+        "contraction <text> are":
+            R(Text("%(text)s're ")),
+        "cap contraction <text> are":
+            R(Function(lambda text:Text(text.capitalize() + "'re ").execute())),
+        "contraction <text> is":
+            R(Text("%(text)s's ")),
+        "cap contraction <text> is":
+            R(Function(lambda text:Text(text.capitalize() + "'s ").execute())),
+        "contraction <text> not":
+            R(Text("%(text)s't ")),
+        "cap contraction <text> not":
+            R(Function(lambda text:Text(text.capitalize() + "'t ").execute())),
+        "contraction <text> (do|would)":
+            R(Text("%(text)s'd ")),
+        "cap contraction <text> (do|would)":
+            R(Function(lambda text:Text(text.capitalize() + "'d ").execute())),
         "<word_limit> [<big>] format <textnv>":
             R(Function(textformat.partial_format_text)),
         "hug <enclosure>":
@@ -298,6 +322,7 @@ class Navigation(MergeRule):
         IntegerRefST("nnavi50", 1, 50),
         IntegerRefST("nnavi500", 1, 500),
         Dictation("textnv"),
+        Dictation("text"),
         Choice("enclosure", _dtpd),
         Choice("direction", {
             "down": "down",
@@ -363,6 +388,7 @@ class Navigation(MergeRule):
         "nnavi10": 1,
         "nnavi3": 1,
         "textnv": "",
+        "text": "",
         "capitalization": 0,
         "spacing": 0,
         "mtn_mode": None,
